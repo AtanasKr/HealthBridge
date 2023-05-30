@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import LoginIcon from '@mui/icons-material/Login';
 
 function Copyright(props) {
     return (
@@ -57,7 +58,7 @@ const SignIn = () => {
           }}
         >
           <Avatar sx={{ m: 4, bgcolor: '#00A3FF', width: "4em", height: "4em" }}>
-            <HowToRegIcon sx={{ width: "2em", height: "2em" }} />
+            <LoginIcon sx={{ width: "2em", height: "2em" }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Вход
