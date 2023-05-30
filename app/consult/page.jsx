@@ -5,6 +5,7 @@ import Navbar from '@components/Navbar'
 import { Grid } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import DoctorList from '@components/DoctorList'
 
 const top100Films = [
     { label: 'The Shawshank Redemption', year: 1994 },
@@ -137,7 +138,7 @@ const ConsultPage = () => {
   return (
     <>
       <Navbar />
-      <Grid container spacing={2} sx={{ pt: "4em", textAlign: "center", pl: "3em" }}>
+      <Grid container spacing={2} sx={{ pt: { xl: "6em", md: "2em" }, textAlign: "center", pl: "3em" }}>
         <Grid item xs={3} md={2} sx={{ border: "solid", borderRadius: "30px" }}>
           <Sidebar />
         </Grid>
@@ -147,8 +148,9 @@ const ConsultPage = () => {
             id="combo-box-demo"
             options={top100Films}
             sx={{ width: "auto", pr: "3em" }}
-            renderInput={(params) => <TextField {...params} label="Movie" />}
+            renderInput={(params) => <TextField {...params} label="Търси..." />}
           />
+          <DoctorList/>
         </Grid>
       </Grid>
     </>
