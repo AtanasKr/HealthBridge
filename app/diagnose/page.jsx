@@ -33,6 +33,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import DoneIcon from '@mui/icons-material/Done';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -87,7 +88,7 @@ function ColorlibStepIcon(props) {
         1: <SettingsAccessibilityIcon />,
         2: <GroupAddIcon />,
         3: <FormatListNumberedRtlIcon />,
-        3: <FormatListNumberedRtlIcon />,
+        4: <DoneIcon />,
     };
 
     return (
@@ -115,7 +116,7 @@ ColorlibStepIcon.propTypes = {
     icon: PropTypes.node,
 };
 
-const steps = ['Пол', 'Години', 'Симптоми'];
+const steps = ['Пол', 'Години', 'Симптоми', 'Диагноза'];
 
 const Diagnose = () => {
 
@@ -222,6 +223,34 @@ const Diagnose = () => {
                         <CardActions>
                             <Button size="small" sx={{ color: "white" }} onClick={() => setStepCount(stepCount - 1)}>{"<"} Назад</Button>
                             <Button size="small" sx={{ color: "white" }} onClick={() => setStepCount(stepCount + 1)}>Напред {">"} </Button>
+                        </CardActions>
+                    </Grid>
+                </Card>}
+                {stepCount == 3 && <Card sx={{ maxWidth: 800, height: "20em", textAlign: "center", backgroundImage: "linear-gradient(#00A3FF, #859CA9)" }}>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div" sx={{ color: "white" }}>
+                            Подредба на възможни диагнози.
+                        </Typography>
+                    </CardContent>
+                    <List>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemText primary="Тест" />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton component="a" href="#simple-list">
+                                <ListItemText primary="Тест2" />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+                    <Grid container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        pt={"2em"}>
+                        <CardActions>
+                            <Button size="small" sx={{ color: "white" }} onClick={() => setStepCount(stepCount - 1)}>{"<"} Назад</Button>
                         </CardActions>
                     </Grid>
                 </Card>}
