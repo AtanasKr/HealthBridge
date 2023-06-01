@@ -13,7 +13,7 @@ const DoctorList = ({ props }) => {
     return (
         <Paper sx={{maxHeight: { xl: "30em", md: "23em" }, overflow: 'auto', mr:"3em", boxShadow:"none", mt:"1em"}}>
             <List sx={{ width: 'auto', bgcolor: 'background.paper', pr: "1em"}}>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px"}}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em"}}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -50,7 +50,7 @@ const DoctorList = ({ props }) => {
                     />
                     <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
                 </ListItem>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px" }}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em" }}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -87,7 +87,7 @@ const DoctorList = ({ props }) => {
                     />
                     <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
                 </ListItem>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px" }}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em" }}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -124,7 +124,7 @@ const DoctorList = ({ props }) => {
                     />
                     <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
                 </ListItem>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px" }}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em" }}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -161,7 +161,7 @@ const DoctorList = ({ props }) => {
                     />
                     <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
                 </ListItem>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px" }}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em" }}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>
@@ -198,7 +198,7 @@ const DoctorList = ({ props }) => {
                     />
                     <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
                 </ListItem>
-                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px" }}>
+                <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb:"0.5em" }}>
                     <ListItemAvatar>
                         <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                     </ListItemAvatar>

@@ -143,7 +143,7 @@ const Diagnose = () => {
                 {stepCount == 0 && <Card sx={{ maxWidth: 800, height: "20em", textAlign: "center", backgroundImage: "linear-gradient(#00A3FF, #859CA9)" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "white" }}>
-                            Какъв е вашия пол?
+                            Какъв е вашият пол?
                         </Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ color: "white" }}>
                             Имаме нужда от информация за вашият пол за да изчислим по-правилно диагнозата ви.
