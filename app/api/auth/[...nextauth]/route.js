@@ -24,9 +24,6 @@ const handler = NextAuth({
                     throw new Error("Invalid input")
                 }
 
-                // 2 parameters -> 
-                // 1 normal password -> 123123
-                // 2 hashed password -> dasuytfygdsaidsaugydsaudsadsadsauads
                 const comparePass = await bcrypt.compare(password, user.password)
 
                 if(!comparePass){

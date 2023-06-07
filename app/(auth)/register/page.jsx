@@ -17,6 +17,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { signIn } from 'next-auth/react';
 
 function Copyright(props) {
   return (
@@ -34,27 +35,65 @@ const theme = createTheme();
 export default function Register() {
   // const [err,setError] = React.useState(null);
   // const navigate = useNavigate();
-  // const [inputs,setInputs] = React.useState({
-  //     username:"",
-  //     email:"",
-  //     password:"",
-  //     password2:""
-  //   })
+  const [inputs, setInputs] = React.useState({
+    email: "",
+    username: "",
+    password: "",
+    password2: "",
+    patient: "",
+    doctor: ""
+  })
+
+  const [selectedCheckBox, setSelectedCheckBox] = React.useState("")
 
   const handleChange = (event) => {
-    setInputs(prev => ({ ...prev, [event.target.name]: event.target.value }))
+    if (event.target.name !== "patient" && event.target.name !== "doctor") {
+      setInputs(prev => ({ ...prev, [event.target.name]: event.target.value }))
+    } else {
+      setSelectedCheckBox(event.target.name)
+    }
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    //validation checking
+    if (inputs.email == "" || inputs.username == "" || inputs.password == "" || inputs.password2 == "") {
+      console.log("Моля попълнете всички полета!");
+      return
+    }
+
+    if (inputs.password !== inputs.password2) {
+      console.log("Паролите трябва да са еднакви!");
+      return
+    }
+
+    if (inputs.password.lenght < 6) {
+      console.log("Паролата трябва да бъде поне 6 символа!");
+      return
+    }
+
     try {
-      let timeElapsed = Date.now();
-      inputs.date = new Date(timeElapsed).toLocaleDateString();
-      await axios.post("/auth/register", inputs)
-      console.log(inputs)
-      navigate("/login");
+      const username = inputs.username;
+      const email = inputs.email;
+      const password = inputs.password;
+      const role = selectedCheckBox;
+      const res = await fetch('http://localhost:3000/api/register', {
+        headers: {
+          'Content-Type': 'applicatiopn/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({ username, email, password, role })
+      })
+
+      if (res.ok) {
+        console.log("Регисриран")
+        signIn();
+        return
+      } else {
+        console.log("Error");
+      }
     } catch (err) {
-      console.log(err)
-      setError(err.response.data);
+      console.log(err);
     }
   };
 
@@ -128,8 +167,8 @@ export default function Register() {
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
               >
-                <FormControlLabel value="doctor" control={<Radio />} label="Доктор" />
-                <FormControlLabel value="patient" control={<Radio />} label="Пациент" />
+                <FormControlLabel value="doctor" name="doctor" onChange={handleChange} control={<Radio />} label="Доктор" />
+                <FormControlLabel value="patient" name="patient" onChange={handleChange} control={<Radio />} label="Пациент" />
               </RadioGroup>
             </FormControl>
             <Button
