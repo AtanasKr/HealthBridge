@@ -33,15 +33,13 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  // const [err,setError] = React.useState(null);
-  // const navigate = useNavigate();
+  const [statusMsg, setStatusMsg] = React.useState(null);
   const [inputs, setInputs] = React.useState({
     email: "",
     username: "",
     password: "",
     password2: "",
-    patient: "",
-    doctor: ""
+    category: "",
   })
 
   const [selectedCheckBox, setSelectedCheckBox] = React.useState("")
@@ -58,17 +56,22 @@ export default function Register() {
 
     //validation checking
     if (inputs.email == "" || inputs.username == "" || inputs.password == "" || inputs.password2 == "") {
-      console.log("Моля попълнете всички полета!");
+      setStatusMsg("Моля попълнете всички полета!")
       return
     }
 
     if (inputs.password !== inputs.password2) {
-      console.log("Паролите трябва да са еднакви!");
+      setStatusMsg("Паролите трябва да са еднакви!")
       return
     }
 
     if (inputs.password.lenght < 6) {
-      console.log("Паролата трябва да бъде поне 6 символа!");
+      setStatusMsg("Паролата трябва да бъде поне 6 символа!")
+      return
+    }
+    
+    if(selectedCheckBox=="doctor"&&inputs.category==""){
+      setStatusMsg("Моля въведете вашата лекарска категория!")
       return
     }
 
@@ -77,23 +80,24 @@ export default function Register() {
       const email = inputs.email;
       const password = inputs.password;
       const role = selectedCheckBox;
+      const category = inputs.category;
       const res = await fetch('http://localhost:3000/api/register', {
         headers: {
           'Content-Type': 'applicatiopn/json'
         },
         method: 'POST',
-        body: JSON.stringify({ username, email, password, role })
+        body: JSON.stringify({ username, email, password, role, category })
       })
 
       if (res.ok) {
-        console.log("Регисриран")
+        setStatusMsg("Успешно създаване на акаунт!")
         signIn();
         return
       } else {
-        console.log("Error");
+        console.log("Error registering user");
       }
     } catch (err) {
-      console.log(err);
+      setStatusMsg(err)
     }
   };
 
@@ -124,7 +128,6 @@ export default function Register() {
               id="email"
               label="Имейл"
               name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -135,7 +138,6 @@ export default function Register() {
               id="username"
               label="Име"
               name="username"
-              autoComplete="name"
               autoFocus
             />
             <TextField
@@ -147,7 +149,6 @@ export default function Register() {
               label="Парола"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
             <TextField
               onChange={handleChange}
@@ -158,7 +159,6 @@ export default function Register() {
               label="Повторете парола"
               type="password"
               id="password2"
-              autoComplete="current-password"
             />
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">Записвате се като?</FormLabel>
@@ -171,6 +171,16 @@ export default function Register() {
                 <FormControlLabel value="patient" name="patient" onChange={handleChange} control={<Radio />} label="Пациент" />
               </RadioGroup>
             </FormControl>
+            {selectedCheckBox=="doctor"&&<TextField
+              onChange={handleChange}
+              margin="normal"
+              required
+              fullWidth
+              name="category"
+              label="Категория"
+              type="text"
+              id="category"
+            />}
             <Button
               type="submit"
               fullWidth
@@ -204,7 +214,8 @@ export default function Register() {
           >
             Начало
           </Button></Link>
-          {/* <Typography sx={{color:"red"}}></Typography> */}
+          {statusMsg&&(statusMsg!="Успешно създаване на акаунт!")&&<Typography sx={{color:"red"}}>{statusMsg}</Typography>}
+          {statusMsg&&(statusMsg=="Успешно създаване на акаунт!")&&<Typography sx={{color:"green"}}>{statusMsg}</Typography>}
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>

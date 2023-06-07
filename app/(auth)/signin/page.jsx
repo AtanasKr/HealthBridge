@@ -32,13 +32,14 @@ const theme = createTheme();
 
 const SignIn = () => {
 
+  const [statusMsg, setStatusMsg] = React.useState(null);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   })
 
   const router = useRouter();
-  
+
   const handleChange = (event) => {
     setInputs(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
@@ -46,29 +47,30 @@ const SignIn = () => {
     event.preventDefault();
 
     //Validation checking
-    if(inputs.password==='' || inputs.email===''){
-      console.log("Моля полълнете всички полета");
+    if (inputs.password === '' || inputs.email === '') {
+      setStatusMsg("Моля полълнете всички полета");
       return
     }
 
-    if(inputs.password.length<6){
-      console.log("Паролата трябва да съдържа поне 6 символа!");
+    if (inputs.password.length < 6) {
+      setStatusMsg("Паролата трябва да съдържа поне 6 символа!");
       return
     }
 
     try {
       const email = inputs.email;
       const password = inputs.password
-      const res = await signIn('credentials', {email, password, redirect: false})
+      const res = await signIn('credentials', { email, password, redirect: false })
 
-      if(res?.error==null){
+      if (res?.error == null) {
+        setStatusMsg(null)
         router.push("/")
-      }else{
+      } else {
         console.log("Error occured while logging")
       }
-      
+
     } catch (err) {
-        console.log(err)
+      console.log(err)
     }
   };
 
@@ -146,7 +148,7 @@ const SignIn = () => {
           >
             Начало
           </Button></Link>
-          {/* <Typography sx={{color:"red"}}></Typography> */}
+          {statusMsg&&<Typography sx={{color:"red"}}>{statusMsg}</Typography>}
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>

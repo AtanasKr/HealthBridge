@@ -4,13 +4,18 @@ import AppBar from '@mui/material/AppBar';
 import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Toolbar, Typography } from '@mui/material';
 import Link from "next/link"
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Avatar from '@mui/material/Avatar';
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const currentUser = true;
 
-    const {data: session} = useSession();
+    const { data: session } = useSession();
+    let username = null
+    if(session){
+        username = session.user.username;  
+    }
 
     // const handleOpenUserMenu = (event) => {
     //   setAnchorElUser(event.currentTarget);
@@ -43,7 +48,7 @@ function Navbar() {
 
                 <Toolbar disableGutters>
 
-                <Link href="/"><Box
+                    <Link href="/"><Box
                         component="img"
                         sx={{
                             height: "2em",
@@ -75,7 +80,7 @@ function Navbar() {
 
                     </Box>
 
-                    {!session?.user&&<Box sx={{
+                    {!session?.user && <Box sx={{
                         flexGrow: 1,
                         display: {
                             xs: 'none',
@@ -85,7 +90,7 @@ function Navbar() {
                         <Button
                             key={"Вход"}
                             sx={{ my: 2, color: 'black' }}
-                            onClick={()=>{signIn()}}>
+                            onClick={() => { signIn() }}>
                             {"Вход"}
                         </Button>
 
@@ -97,17 +102,23 @@ function Navbar() {
 
                     </Box>}
 
-                    {session?.user&&<Box sx={{
+                    {session?.user && <Box sx={{
                         flexGrow: 1,
                         display: {
                             xs: 'none',
                             md: 'flex', paddingLeft: "30em"
                         }
                     }}>
+                        <Avatar sx={{ mt: "0.6em", mr: "1em" }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                        <Button
+                            key={username}
+                            sx={{ my: 2, color: 'black' }}>
+                            {username}
+                        </Button>
                         <Button
                             key={"Изход"}
                             sx={{ my: 2, color: 'black' }}
-                            onClick={()=>{signOut()}}>
+                            onClick={() => { signOut() }}>
                             {"Изход"}
                         </Button>
 

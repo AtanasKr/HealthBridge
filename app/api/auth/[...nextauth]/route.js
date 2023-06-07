@@ -10,7 +10,7 @@ const handler = NextAuth({
         CredentialsProvider({
             type: 'credentials',
             credentials: {
-                username: {label: 'Email', type: 'text', placeholder: 'John Doe'},
+                email: {label: 'Email', type: 'text'},
                 password: {label: 'Password', type: 'password'}
             },
             async authorize(credentials, req){
@@ -29,13 +29,14 @@ const handler = NextAuth({
                 if(!comparePass){
                     throw new Error("Invalid input")
                 } else {
+                    //all the values that will be returs with useSession
                     const {password, ...currentUser} = user._doc
 
                     const accessToken = signJwtToken(currentUser, {expiresIn: '6d'})
 
                     return {
                         ...currentUser,
-                        accessToken
+                        accessToken,
                     }
                 }
             }
@@ -45,10 +46,12 @@ const handler = NextAuth({
         signIn: '/signin'
     },
     callbacks: {
+        //passing the values that will be used in the useSession to the token and to the session
         async jwt({token, user}){
             if(user){
                 token.accessToken = user.accessToken
                 token._id = user._id
+                token.username = user.username
             }
 
             return token
@@ -57,6 +60,7 @@ const handler = NextAuth({
             if(token){
                 session.user._id = token._id
                 session.user.accessToken = token.accessToken
+                session.user.username = token.username
             }
 
             return session
