@@ -13,38 +13,65 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import LoginIcon from '@mui/icons-material/Login';
+import { useState } from 'react'
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 function Copyright(props) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        HealthBridge
-        {" " + new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-  
-  const theme = createTheme();
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      HealthBridge
+      {" " + new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-const handleChange = (event) => {
+const theme = createTheme();
+
+const SignIn = () => {
+
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  })
+
+  const router = useRouter();
+  
+  const handleChange = (event) => {
     setInputs(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    //Validation checking
+    if(inputs.password==='' || inputs.email===''){
+      console.log("Моля полълнете всички полета");
+      return
+    }
+
+    if(inputs.password.length<6){
+      console.log("Паролата трябва да съдържа поне 6 символа!");
+      return
+    }
+
     try {
-      let timeElapsed = Date.now();
-      inputs.date = new Date(timeElapsed).toLocaleDateString();
-      await axios.post("/auth/register", inputs)
-      console.log(inputs)
-      navigate("/login");
+      const email = inputs.email;
+      const password = inputs.password
+      const res = await signIn('credentials', {email, password, redirect: false})
+
+      if(res?.error==null){
+        router.push("/")
+      }else{
+        console.log("Error occured while logging")
+      }
+      
     } catch (err) {
-      console.log(err)
-      setError(err.response.data);
+        console.log(err)
     }
   };
 
-const SignIn = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">

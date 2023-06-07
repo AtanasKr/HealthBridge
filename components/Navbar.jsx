@@ -3,11 +3,14 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Toolbar, Typography } from '@mui/material';
 import Link from "next/link"
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const currentUser = true;
+
+    const {data: session} = useSession();
 
     // const handleOpenUserMenu = (event) => {
     //   setAnchorElUser(event.currentTarget);
@@ -72,18 +75,19 @@ function Navbar() {
 
                     </Box>
 
-                    <Box sx={{
+                    {!session?.user&&<Box sx={{
                         flexGrow: 1,
                         display: {
                             xs: 'none',
                             md: 'flex', paddingLeft: "30em"
                         }
                     }}>
-                        <Link href="/signin"><Button
+                        <Button
                             key={"Вход"}
-                            sx={{ my: 2, color: 'black' }}>
+                            sx={{ my: 2, color: 'black' }}
+                            onClick={()=>{signIn()}}>
                             {"Вход"}
-                        </Button></Link>
+                        </Button>
 
                         <Link href="/register"><Button
                             key={"Регистрация"}
@@ -91,7 +95,23 @@ function Navbar() {
                             {"Регистрация"}
                         </Button></Link>
 
-                    </Box>
+                    </Box>}
+
+                    {session?.user&&<Box sx={{
+                        flexGrow: 1,
+                        display: {
+                            xs: 'none',
+                            md: 'flex', paddingLeft: "30em"
+                        }
+                    }}>
+                        <Button
+                            key={"Изход"}
+                            sx={{ my: 2, color: 'black' }}
+                            onClick={()=>{signOut()}}>
+                            {"Изход"}
+                        </Button>
+
+                    </Box>}
 
                 </Toolbar>
 
