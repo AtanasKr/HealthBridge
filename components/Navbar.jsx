@@ -7,9 +7,6 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Avatar from '@mui/material/Avatar';
 
 function Navbar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const currentUser = true;
 
     const { data: session } = useSession();
     let username = null

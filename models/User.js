@@ -1,3 +1,4 @@
+import { Int32 } from 'mongodb';
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
@@ -23,6 +24,10 @@ const UserSchema = new mongoose.Schema({
         required: false
     },
     category:{
+        type: String,
+        required: false
+    },
+    price:{
         type: String,
         required: false
     }

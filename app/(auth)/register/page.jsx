@@ -40,6 +40,7 @@ export default function Register() {
     password: "",
     password2: "",
     category: "",
+    price:"",
   })
 
   const [selectedCheckBox, setSelectedCheckBox] = React.useState("")
@@ -80,13 +81,14 @@ export default function Register() {
       const email = inputs.email;
       const password = inputs.password;
       const role = selectedCheckBox;
-      const category = inputs.category;
+      const category = inputs.category.toLowerCase();
+      const price = inputs.price;
       const res = await fetch('http://localhost:3000/api/register', {
         headers: {
           'Content-Type': 'applicatiopn/json'
         },
         method: 'POST',
-        body: JSON.stringify({ username, email, password, role, category })
+        body: JSON.stringify({ username, email, password, role, category, price })
       })
 
       if (res.ok) {
@@ -180,6 +182,16 @@ export default function Register() {
               label="Категория"
               type="text"
               id="category"
+            />}
+            {selectedCheckBox=="doctor"&&<TextField
+              onChange={handleChange}
+              margin="normal"
+              required
+              fullWidth
+              name="price"
+              label="Категория"
+              type="number"
+              id="price"
             />}
             <Button
               type="submit"
