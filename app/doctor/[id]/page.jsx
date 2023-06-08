@@ -21,7 +21,7 @@ export default function Doctor() {
             sx={{mt:"10em"}}
         >
             <Grid item xs={3}>
-                <Card display="flex" justify="center" alignItems="center" sx={{ maxWidth: 600 }}>
+                <Card display="flex" justify="center" sx={{ maxWidth: 600 }}>
                     {/* <CardMedia
                         sx={{ height: 140 }}
                         image="/static/images/cards/contemplative-reptile.jpg"

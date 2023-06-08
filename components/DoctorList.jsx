@@ -13,7 +13,6 @@ import Link from 'next/link';
 
 const DoctorList = (props) => {
     const [doctorsDetails, setDoctorDetails] = React.useState(null);
-    console.log(props)
     useEffect(() => {
         async function fetchDoctors() {
             const res = await fetch(`http://localhost:3000/api/consult`)
@@ -28,9 +27,11 @@ const DoctorList = (props) => {
         <Paper sx={{ maxHeight: { xl: "30em", md: "23em" }, overflow: 'auto', mr: "3em", boxShadow: "none", mt: "1em" }}>
             <List sx={{ width: 'auto', bgcolor: 'background.paper', pr: "1em" }}>
                 {doctorsDetails?.filter((val) => {
-                    if (!props?.searchWord?.label) {
+                    if (!props?.searchWord?.label && props?.selectedButton == "all") {
                         return val;
-                    } else if (val.username.toLowerCase().includes(props?.searchWord?.label?.toLowerCase())) {
+                    } else if ((val.username.toLowerCase().includes(props?.searchWord?.label.toLowerCase()) && val.category.toLowerCase().includes(props?.selectedButton.toLowerCase()))
+                        || val.category.toLowerCase().includes(props?.selectedButton.toLowerCase())
+                        || (val.username.toLowerCase().includes(props?.searchWord?.label.toLowerCase()) && props?.selectedButton == "all")) {
                         return val;
                     }
                 }).map((val) => {
