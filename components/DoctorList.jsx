@@ -9,10 +9,11 @@ import Typography from '@mui/material/Typography';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Paper } from '@mui/material';
 import { useEffect } from 'react'
+import Link from 'next/link';
 
-const DoctorList = () => {
+const DoctorList = (props) => {
     const [doctorsDetails, setDoctorDetails] = React.useState(null);
-
+    console.log(props)
     useEffect(() => {
         async function fetchDoctors() {
             const res = await fetch(`http://localhost:3000/api/consult`)
@@ -23,13 +24,18 @@ const DoctorList = () => {
         fetchDoctors();
     }, [])
 
-    console.log(doctorsDetails)
     return (
         <Paper sx={{ maxHeight: { xl: "30em", md: "23em" }, overflow: 'auto', mr: "3em", boxShadow: "none", mt: "1em" }}>
             <List sx={{ width: 'auto', bgcolor: 'background.paper', pr: "1em" }}>
-                {doctorsDetails?.map((val) => {
+                {doctorsDetails?.filter((val) => {
+                    if (!props?.searchWord?.label) {
+                        return val;
+                    } else if (val.username.toLowerCase().includes(props?.searchWord?.label?.toLowerCase())) {
+                        return val;
+                    }
+                }).map((val) => {
                     return (
-                        <ListItem alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb: "0.5em" }}>
+                        <Link href={`/doctor/${val._id}`}><ListItem key={val._id} alignItems="flex-start" sx={{ border: "solid", borderColor: "#00A3FF", borderRadius: "20px", mb: "0.5em" }}>
                             <ListItemAvatar>
                                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
                             </ListItemAvatar>
@@ -43,14 +49,14 @@ const DoctorList = () => {
                                             variant="body2"
                                             color="text.primary"
                                         >
-                                            {val.category   }
+                                            {val.category}
                                         </Typography>
                                         {" — Short desc......"}
                                     </React.Fragment>
                                 }
                             />
-                            <ListItemText sx={{position:"absolute", pl:"30em"}}
-                                primary="Цена на преглед"
+                            <ListItemText sx={{ position: "absolute", pl: "30em" }}
+                                primary="Цена за консултация"
                                 secondary={
                                     <React.Fragment>
                                         <Typography
@@ -65,7 +71,8 @@ const DoctorList = () => {
                                 }
                             />
                             <ArrowForwardIosIcon sx={{ mt: "0.6em" }} />
-                        </ListItem>)
+                        </ListItem></Link>
+                    )
                 })}
             </List>
         </Paper>
