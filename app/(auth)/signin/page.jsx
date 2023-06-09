@@ -133,10 +133,10 @@ const SignIn = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                Забравена парола?
+              <Link href="/register">Забравена парола?</Link>
               </Grid>
               <Grid item>
-                Нямате акаунт? Регистрация
+              <Link href="/register">Нямате акаунт? Регистрация</Link>
               </Grid>
             </Grid>
           </Box>

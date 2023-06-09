@@ -222,9 +222,6 @@ export default function Register() {
               Регистрация
             </Button>
             <Grid container>
-              <Grid item xs>
-                Забравена парола?
-              </Grid>
               <Grid item>
               <Link href="/signin">Вече имате акаунт? Влезте</Link>
               </Grid>
