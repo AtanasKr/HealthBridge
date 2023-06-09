@@ -10,6 +10,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Paper } from '@mui/material';
 import { useEffect } from 'react'
 import Link from 'next/link';
+import LoadingComponent from './LoadingComponent';
 
 const DoctorList = (props) => {
     const [doctorsDetails, setDoctorDetails] = React.useState(null);
@@ -22,7 +23,9 @@ const DoctorList = (props) => {
 
         fetchDoctors();
     }, [])
-
+    if(!doctorsDetails){
+        return <LoadingComponent/>
+    }
     return (
         <Paper sx={{ maxHeight: { xl: "30em", md: "23em" }, overflow: 'auto', mr: "3em", boxShadow: "none", mt: "1em" }}>
             <List sx={{ width: 'auto', bgcolor: 'background.paper', pr: "1em" }}>
@@ -52,7 +55,7 @@ const DoctorList = (props) => {
                                         >
                                             {val.category}
                                         </Typography>
-                                        {" — Short desc......"}
+                                        {`—${val.description.substring(0,20)}...`}
                                     </React.Fragment>
                                 }
                             />

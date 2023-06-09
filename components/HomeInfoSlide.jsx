@@ -30,12 +30,13 @@ const HomeInfoSlide = () => {
                     Health Bridge
                 </Typography>
                 <Typography variant="body2" component="p" fontSize="17px" color="white">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-                    Sed pharetra sapien lacus, in lobortis sapien suscipit non.<br />
-                    Curabitur diam nisl, dapibus vitae tempus et, commodo in lorem.<br />
-                    Maecenas viverra justo at dolor faucibus vulputate.<br />
-                    Maecenas a nulla ut mi condimentum bibendum dictum sit amet metus. <br />
-                    Integer a orci fringilla, semper mi a, tincidunt magna.
+                Health Bridge е медицински уебсайт,<br/> 
+                предоставящ широк спектър от медицински услуги<br/>
+                и ресурси, които помагат на потребителите да получат<br/>
+                достъп до качествена здравна грижа.<br/>
+                Сайтът предлага различни функционалности,<br/>
+                включително консултации с лекари, записване на<br/>
+                прегледи, самодиагностика и регистрация.
                 </Typography>
             </Grid>
         </Box>

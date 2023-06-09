@@ -30,6 +30,10 @@ const UserSchema = new mongoose.Schema({
     price:{
         type: String,
         required: false
+    },
+    description:{
+        type: String,
+        required: false
     }
 }, {timestamps:true})
 
