@@ -11,7 +11,7 @@ function Navbar() {
     const { data: session } = useSession();
     let username = null
     if(session){
-        username = session.user.username;  
+        username = session.user.username;
     }
 
     return (
@@ -91,7 +91,7 @@ function Navbar() {
                         flexGrow: 1,
                         display: {
                             xs: 'none',
-                            md: 'flex', paddingLeft: "30em"
+                            md: 'flex', paddingLeft: "15em"
                         }
                     }}>
                         <Avatar sx={{ mt: "0.6em", mr: "1em" }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />

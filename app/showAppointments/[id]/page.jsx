@@ -9,19 +9,33 @@ import { useEffect } from 'react'
 import Link from 'next/link';
 import LoadingComponent from '@components/LoadingComponent'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useSession } from 'next-auth/react'
 
-const bookAppointment = () => {
+const showAppointments = () => {
 
+    const { data: session, status } = useSession()
     const [appointments, setAppointments] = React.useState(null);
     useEffect(() => {
         async function fetchAppointments() {
             const res = await fetch(`http://localhost:3000/api/getAppointments`)
             const appointments = await res.json();
-            setAppointments(appointments);
+            debugger;
+            let results = appointments.filter(obj => {
+                debugger;
+                return (session?.user._id === obj.docId);
+            });
+            if (results.length==0) {
+                results = appointments.filter(obj => {
+                    debugger;
+                    return (session?.user._id === obj.patientId);
+                });
+            }
+            setAppointments(results);
+            debugger;
         }
 
         fetchAppointments();
-    }, [])
+    }, [session])
     if (!appointments) {
         return <LoadingComponent />
     }
@@ -77,10 +91,11 @@ const bookAppointment = () => {
                     })}
                 </List>
             </Paper>
+            {appointments.length==0&&<Typography sx={{pr:"4em"}}>Нямате записани часове</Typography>}
             <Link href="/"><Button
                 type="submit"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, pl: "2em", pr: "2em", mr:"5em" }}
+                sx={{ mt: 3, mb: 2, pl: "2em", pr: "2em", mr: "5em" }}
                 startIcon={<ArrowBackIosIcon />}
             >
                 Начало
@@ -90,4 +105,4 @@ const bookAppointment = () => {
     )
 }
 
-export default bookAppointment
+export default showAppointments

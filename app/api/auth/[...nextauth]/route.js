@@ -52,6 +52,7 @@ const handler = NextAuth({
                 token.accessToken = user.accessToken
                 token._id = user._id
                 token.username = user.username
+                token.role = user.role
             }
 
             return token
@@ -61,6 +62,7 @@ const handler = NextAuth({
                 session.user._id = token._id
                 session.user.accessToken = token.accessToken
                 session.user.username = token.username
+                session.user.role = token.role
             }
 
             return session
