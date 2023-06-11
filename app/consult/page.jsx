@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import { useEffect } from 'react'
-import Sidebar from "@components/Sidebar"
 import Navbar from '@components/Navbar'
 import { FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup } from '@mui/material'
 import Autocomplete from '@mui/material/Autocomplete';

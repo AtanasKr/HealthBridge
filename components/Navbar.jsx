@@ -14,24 +14,6 @@ function Navbar() {
         username = session.user.username;  
     }
 
-    // const handleOpenUserMenu = (event) => {
-    //   setAnchorElUser(event.currentTarget);
-    // };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-    const handleLogOut = (e) => {
-        e.preventDefault();
-        logout();
-        window.location.reload()
-    }
-
     return (
         <AppBar position="static"
             sx={{
@@ -53,7 +35,7 @@ function Navbar() {
                             paddingBottom: "0.3em"
                         }}
                         alt="Main-logo"
-                        src={"/assets/images/Main-logo.png"}
+                        src={"/assets/images/Main-Logo.png"}
                     /></Link>
 
                     <Box sx={{
