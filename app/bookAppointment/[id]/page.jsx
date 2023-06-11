@@ -1,11 +1,12 @@
 "use client"
 import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, TextField, ThemeProvider, Typography, createTheme } from '@mui/material'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const bookAppointment = (ctx) => {
     const theme = createTheme();
@@ -14,10 +15,27 @@ const bookAppointment = (ctx) => {
     const [time, setTime] = useState("")
     const [err, setErr] = useState("");
 
+    const router = useRouter()
+
     const { data: session, status } = useSession()
 
-    const handleChange = (event, value) => setTime(value);
+    const [doctorHolder, setDoctorHolder] = useState(null);
+    let doctor
 
+    useEffect(() => {
+        async function fetchDoctor() {
+
+            const res = await fetch(`http://localhost:3000/api/doctor/${ctx.params.id}`)
+            doctor = await res.json();
+            setDoctorHolder(doctor)
+
+        }
+
+        fetchDoctor();
+    }, [])
+
+
+    const handleChange = (event, value) => setTime(value);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -29,6 +47,9 @@ const bookAppointment = (ctx) => {
         try {
             const docId = ctx.params.id;
             const patientId = session.user._id;
+            const docName = doctorHolder[0].username;
+            const docCat = doctorHolder[0].category;
+            const patientName = session.user.username;
             const appointmentDate = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear();
             const appointmentTime = time.label;
             const res = await fetch(`http://localhost:3000/api/appointment`, {
@@ -36,12 +57,15 @@ const bookAppointment = (ctx) => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${session?.user?.accessToken}`
                 }, method: 'POST',
-                body: JSON.stringify({docId, patientId, appointmentDate, appointmentTime})
+                body: JSON.stringify({ docId, patientId, docName, docCat, patientName, appointmentDate, appointmentTime })
             });
+
 
             if (!res.ok) {
                 throw new Error("Error occured")
             }
+
+            router.push(`/showAppointments/${patientId}`)
 
         } catch (error) {
             setErr(error)
@@ -127,7 +151,7 @@ const bookAppointment = (ctx) => {
                     >
                         Начало
                     </Button></Link>
-                    {err&&<Typography sx={{color:"red"}}>{err}</Typography>}
+                    {err && <Typography sx={{ color: "red" }}>{err}</Typography>}
                 </Box>
             </Container>
         </ThemeProvider>

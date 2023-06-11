@@ -57,6 +57,12 @@ function Navbar() {
                             {"Самодиагностика"}
                         </Button></Link>
 
+                        {session?.user &&<Link href={`/showAppointments/${session.user._id}`}><Button
+                            key={"Записани часове"}
+                            sx={{ my: 2, color: 'black' }}>
+                            {"Записани часове"}
+                        </Button></Link>}
+
                     </Box>
 
                     {!session?.user && <Box sx={{
