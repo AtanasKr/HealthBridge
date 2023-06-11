@@ -1,6 +1,6 @@
 'use client'
 import Navbar from '@components/Navbar'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
@@ -134,6 +134,7 @@ const Diagnose = () => {
     const handleClearDiagnose = () => {
         setDiagnoseList([]);
         setStepCount(stepCount - 1)
+        setSymList[[]]
     };
 
 
@@ -150,32 +151,58 @@ const Diagnose = () => {
     const getUnique = () => {
         let countVar = 0;
         if (symList.some(e => e.label === "обриви")) {
-            countVar = countVar+1;
+            countVar = countVar + 1;
         }
         if (symList.some(e => e.label === "сърбеж")) {
-            countVar = countVar+1;
+            countVar = countVar + 1;
         }
         if (symList.some(e => e.label === "температура")) {
-            countVar = countVar+1;
+            countVar = countVar + 1;
         }
 
         let countEarInfect = 0;
         if (symList.some(e => e.label === "болки в ушите")) {
-            countEarInfect = countEarInfect+1;
+            countEarInfect = countEarInfect + 1;
         }
         if (symList.some(e => e.label === "секрет от ушите")) {
-            countEarInfect = countEarInfect+1;
+            countEarInfect = countEarInfect + 1;
         }
         if (symList.some(e => e.label === "загуба на слух")) {
-            countEarInfect = countEarInfect+1;
+            countEarInfect = countEarInfect + 1;
         }
 
-        if(countEarInfect==3){
-            setDiagnoseList(diagnoseList => [...diagnoseList, {label:"ушна инфекция"}]);
+        if (countEarInfect == 3) {
+            setDiagnoseList(diagnoseList => [...diagnoseList, { label: "ушна инфекция" }]);
+        } else if (countVar == 3) {
+            setDiagnoseList(diagnoseList => [...diagnoseList, { label: "варицела" }]);
         }
 
         setStepCount(stepCount + 1)
     }
+
+    function removeDuplicates(arr) {
+        return [...new Set(arr)];
+    }
+    useEffect(() => {
+        async function fetchDiagnoses() {
+            const res = await fetch(`http://localhost:3000/api/diagnose`)
+            const diagnoses = await res.json();
+            symList.map((val) => {
+                diagnoses.map((val2) => {
+                    if (val2.symptoms.includes(val.label)) {
+                        debugger;
+                        setDiagnoseList(diagnoseList => [...diagnoseList, val2.name])
+                    }
+                    
+                })
+                setDiagnoseList(diagnoseList => [...removeDuplicates(diagnoseList)])
+            });
+
+        }
+
+
+        fetchDiagnoses();
+    }, [(stepCount == 3)])
 
     return (
         <div>
@@ -282,18 +309,18 @@ const Diagnose = () => {
                         </CardActions>
                     </Grid>
                 </Card>}
-                {stepCount == 3 && <Card sx={{ maxWidth: 800, height: "20em", textAlign: "center", backgroundImage: "linear-gradient(#00A3FF, #859CA9)" }}>
+                {stepCount == 3 && <Card sx={{ maxWidth: 800, height: "auto", textAlign: "center", backgroundImage: "linear-gradient(#00A3FF, #859CA9)" }}>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" sx={{ color: "white" }}>
                             Подредба на възможни диагнози.
                         </Typography>
                     </CardContent>
                     <List>
-                    {diagnoseList.map((val) => {
+                        {diagnoseList.map((val) => {
                             return (
                                 <ListItem disablePadding>
                                     <ListItemButton>
-                                        <ListItemText primary={val.label} />
+                                        <ListItemText primary={val} />
                                     </ListItemButton>
                                 </ListItem>)
                         })}
