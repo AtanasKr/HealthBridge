@@ -1,7 +1,7 @@
 "use client";
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Toolbar, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Container, Toolbar } from '@mui/material';
 import Link from "next/link"
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Avatar from '@mui/material/Avatar';
@@ -61,6 +61,12 @@ function Navbar() {
                             key={"Записани часове"}
                             sx={{ my: 2, color: 'black' }}>
                             {"Записани часове"}
+                        </Button></Link>}
+
+                        {session?.user &&<Link href={`/chat/${session.user._id}`}><Button
+                            key={"Мои чатове"}
+                            sx={{ my: 2, color: 'black' }}>
+                            {"Мои чатове"}
                         </Button></Link>}
 
                     </Box>

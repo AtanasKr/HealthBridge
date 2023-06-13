@@ -57,12 +57,12 @@ export default function Doctor(ctx) {
                             Спецялност: {doctorHolder[0].category}
                         </Typography>
                         <Typography gutterBottom variant="h8" component="div">
-                            Цена: {doctorHolder[0].price}
+                            Цена: {doctorHolder[0].price} лв
                         </Typography>
                     </CardContent>
                     <CardActions>
                         <Link href="/consult"><Button size="small">Назад</Button></Link>
-                        <Button size="small">Запонете чат</Button>
+                        <Link href={`http://localhost:3000/chat/${ctx.params.id}`}><Button size="small">Чат</Button></Link>
                         <Link href={`http://localhost:3000/bookAppointment/${ctx.params.id}`}><Button size="small">Запазете дата за преглед</Button></Link>
                     </CardActions>
                 </Card>
