@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import Link from 'next/link';
 import LoadingComponent from '@components/LoadingComponent'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useSession } from 'next-auth/react'
 
 const showAppointments = () => {
@@ -48,14 +49,17 @@ const showAppointments = () => {
                         let firstName;
                         let secondName;
                         let idForRedirect;
+                        let forward;
                         if(session?.user._id===val.idFrom){
                             firstName = val.nameTo;
                             secondName = val.nameFrom;
                             idForRedirect = val.idTo;
+                            forward = true;
                         }else{
                             firstName = val.nameFrom;
                             secondName = val.nameTo;
                             idForRedirect = val.idFrom;
+                            forward = false;
                         }
 
                         return (
@@ -63,7 +67,9 @@ const showAppointments = () => {
                                 <ListItemText
                                     primary={firstName}
                                 />
-                                <ListItemText sx={{ position: "absolute", pl: "19em" }}
+                                {forward&&<ArrowBackIosIcon sx={{position:"absolute", ml:"9em", mt:"0.2em"}} />}
+                                {!forward&&<ArrowForwardIosIcon sx={{position:"absolute", ml:"9em", mt:"0.2em"}} />}
+                                <ListItemText sx={{ position: "absolute", pl: "25em" }}
                                     primary={secondName}
                                 />
                             </ListItem></Link>
