@@ -1,5 +1,5 @@
 import db from "@app/lib/db";
-import { verifyJwtToken, verifyToken } from '@app/lib/jwt'
+import { verifyJwtToken } from '@app/lib/jwt'
 import Appointment from "@/models/Appointment";
 
 

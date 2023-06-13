@@ -184,7 +184,6 @@ const Diagnose = () => {
             symList.map((val) => {
                 diagnoses.map((val2) => {
                     if (val2.symptoms.includes(val.label)) {
-                        debugger;
                         setDiagnoseList(diagnoseList => [...diagnoseList, val2.name])
                     }
                     

@@ -19,19 +19,15 @@ const showAppointments = () => {
         async function fetchAppointments() {
             const res = await fetch(`http://localhost:3000/api/getAppointments`)
             const appointments = await res.json();
-            debugger;
             let results = appointments.filter(obj => {
-                debugger;
                 return (session?.user._id === obj.docId);
             });
             if (results.length==0) {
                 results = appointments.filter(obj => {
-                    debugger;
                     return (session?.user._id === obj.patientId);
                 });
             }
             setAppointments(results);
-            debugger;
         }
 
         fetchAppointments();

@@ -1,5 +1,4 @@
 import db from "@app/lib/db";
-import { verifyJwtToken, verifyToken } from '@app/lib/jwt'
 import Diagnose from "@/models/Diagnose";
 
 export async function GET(req) {
