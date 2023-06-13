@@ -51,22 +51,22 @@ function Navbar() {
                             {"Консултация"}
                         </Button></Link>
 
-                        <Link href="/diagnose"><Button
+                        {session?.user?.role==="patient" &&<Link href="/diagnose"><Button
                             key={"Самодиагностика"}
                             sx={{ my: 2, color: 'black' }}>
                             {"Самодиагностика"}
-                        </Button></Link>
-
-                        {session?.user &&<Link href={`/showAppointments/${session.user._id}`}><Button
-                            key={"Записани часове"}
-                            sx={{ my: 2, color: 'black' }}>
-                            {"Записани часове"}
                         </Button></Link>}
 
-                        {session?.user &&<Link href={`/chat/${session.user._id}`}><Button
-                            key={"Мои чатове"}
+                        {session?.user?.role==="patient" &&<Link href={`/showAppointments/${session.user._id}`}><Button
+                            key={"Часове"}
                             sx={{ my: 2, color: 'black' }}>
-                            {"Мои чатове"}
+                            {"Часове"}
+                        </Button></Link>}
+
+                        {session?.user &&<Link href={`/showChats`}><Button
+                            key={"Хронология на съобщения"}
+                            sx={{ my: 2, color: 'black' }}>
+                            {"Хронология на съобщения"}
                         </Button></Link>}
 
                     </Box>
@@ -97,7 +97,7 @@ function Navbar() {
                         flexGrow: 1,
                         display: {
                             xs: 'none',
-                            md: 'flex', paddingLeft: "15em"
+                            md: 'flex', paddingLeft: "10em"
                         }
                     }}>
                         <Avatar sx={{ mt: "0.6em", mr: "1em" }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
