@@ -37,14 +37,14 @@ const Chat = (ctx) => {
     }
 
     useEffect(() => {
-        async function sendMessage() {
+        async function getDoctorInfo() {
 
             const res = await fetch(`http://localhost:3000/api/doctor/${ctx.params.id}`)
             doctor = await res.json();
             setDoctorHolder(doctor)
         }
 
-        sendMessage();
+        getDoctorInfo();
     }, [doctor])
 
     useEffect(() => {
@@ -76,8 +76,6 @@ const Chat = (ctx) => {
                     throw new Error("Error occured")
                 }
 
-                // router.push(`/showAppointments/${patientId}`)
-
             } catch (error) {
                 console.log(error)
             }
@@ -90,7 +88,6 @@ const Chat = (ctx) => {
         setInput(event.target.value);
     };
 
-    debugger;
     if (!messages) {
         return <LoadingComponent />
     }
@@ -115,7 +112,7 @@ const Chat = (ctx) => {
                             <TextField
                                 size="small"
                                 fullWidth
-                                placeholder="Type a message"
+                                placeholder="Въведете съобщение..."
                                 variant="outlined"
                                 value={input}
                                 onChange={handleInputChange}
@@ -129,7 +126,7 @@ const Chat = (ctx) => {
                                 endIcon={<SendIcon />}
                                 onClick={handleSend}
                             >
-                                Send
+                                Изпрати
                             </Button>
                         </Grid>
                     </Grid>
