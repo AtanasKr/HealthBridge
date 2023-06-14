@@ -5,14 +5,12 @@ import {
     TextField,
     Button,
     Typography,
-    Avatar,
     Grid,
     Paper,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import LoadingComponent from "@components/LoadingComponent";
-import { signIn, signOut, useSession } from 'next-auth/react';
-import Link from "next/link";
+import { useSession } from 'next-auth/react';
 
 
 let messages = null;
