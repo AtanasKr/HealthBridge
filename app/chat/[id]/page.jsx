@@ -29,9 +29,11 @@ const Chat = (ctx) => {
 
         const resMessages = await fetch("http://localhost:3000/api/getChats")
         const getMessages = await resMessages.json();
-        debugger;
-        if (getMessages.length > 0) {
-            setMessages(getMessages);
+        let results = getMessages.filter(obj => {
+            return ((session?.user._id === obj.idFrom||session?.user._id === obj.idTo)&&(ctx.params.id === obj.idFrom||ctx.params.id === obj.idTo));
+        });
+        if (results.length > 0) {
+            setMessages(results);
         }
         debugger;
     }
