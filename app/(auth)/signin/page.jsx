@@ -1,5 +1,5 @@
 "use client"
-import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,13 +7,11 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import LoginIcon from '@mui/icons-material/Login';
-import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
@@ -32,7 +30,7 @@ const theme = createTheme();
 
 const SignIn = () => {
 
-  const [statusMsg, setStatusMsg] = React.useState(null);
+  const [statusMsg, setStatusMsg] = useState(null);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",

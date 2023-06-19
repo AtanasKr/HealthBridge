@@ -1,5 +1,4 @@
 "use client";
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import { Box, Button, Card, CardContent, Container, Toolbar } from '@mui/material';
 import Link from "next/link"
@@ -101,11 +100,11 @@ function Navbar() {
                         }
                     }}>
                         <Avatar sx={{ mt: "0.6em", mr: "1em" }} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                        <Button
+                        <Link href={`/profile/${session?.user?._id}`}><Button
                             key={username}
                             sx={{ my: 2, color: 'black' }}>
                             {username}
-                        </Button>
+                        </Button></Link>
                         <Button
                             key={"Изход"}
                             sx={{ my: 2, color: 'black' }}

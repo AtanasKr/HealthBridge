@@ -1,5 +1,4 @@
 "use client"
-import React from 'react';
 import { Paper, Typography, Icon } from "@mui/material";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';

@@ -1,5 +1,4 @@
 'use client'
-import * as React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -10,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Sidebar() {
-    const [selectedCheckBox, setSelectedCheckBox] = React.useState("")
+    const [selectedCheckBox, setSelectedCheckBox] = useState("")
     const handleChange = (event) => {
         localStorage.setItem("sideBarButton", event.target.value);
     }

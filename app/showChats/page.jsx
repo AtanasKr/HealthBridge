@@ -1,11 +1,10 @@
 "use client"
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper, Button } from '@mui/material';
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link';
 import LoadingComponent from '@components/LoadingComponent'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -15,7 +14,7 @@ import { useSession } from 'next-auth/react'
 const showAppointments = () => {
 
     const { data: session, status } = useSession()
-    const [chats, setChats] = React.useState(null);
+    const [chats, setChats] = useState(null);
     useEffect(() => {
         async function fetchChats() {
             const res = await fetch(`http://localhost:3000/api/getChats`)

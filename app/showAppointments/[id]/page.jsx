@@ -1,11 +1,10 @@
 "use client"
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper, Button } from '@mui/material';
-import { useEffect } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link';
 import LoadingComponent from '@components/LoadingComponent'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -14,7 +13,7 @@ import { useSession } from 'next-auth/react'
 const showAppointments = () => {
 
     const { data: session, status } = useSession()
-    const [appointments, setAppointments] = React.useState(null);
+    const [appointments, setAppointments] = useState(null);
     useEffect(() => {
         async function fetchAppointments() {
             const res = await fetch(`http://localhost:3000/api/getAppointments`)
@@ -54,7 +53,7 @@ const showAppointments = () => {
                                 <ListItemText
                                     primary={`Пациент: ${val.patientName}`}
                                     secondary={
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Typography
                                                 sx={{ display: 'inline' }}
                                                 component="span"
@@ -64,13 +63,13 @@ const showAppointments = () => {
                                                 {`Доктор: ${val.docName}`}
                                             </Typography>
                                             {`—${val.docCat}`}
-                                        </React.Fragment>
+                                        </Fragment>
                                     }
                                 />
                                 <ListItemText sx={{ position: "absolute", pl: "19em" }}
                                     primary="Дата и час"
                                     secondary={
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Typography
                                                 sx={{ display: 'inline' }}
                                                 component="span"
@@ -79,7 +78,7 @@ const showAppointments = () => {
                                             >
                                                 {`${val.appointmentDate} - ${val.appointmentTime}`}
                                             </Typography>
-                                        </React.Fragment>
+                                        </Fragment>
                                     }
                                 />
                             </ListItem>

@@ -1,7 +1,7 @@
 "use client"
 import { Autocomplete, Avatar, Box, Button, Container, CssBaseline, TextField, ThemeProvider, Typography, createTheme } from '@mui/material'
 import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';

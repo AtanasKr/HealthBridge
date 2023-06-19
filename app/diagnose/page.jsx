@@ -1,6 +1,6 @@
 'use client'
 import Navbar from '@components/Navbar'
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';

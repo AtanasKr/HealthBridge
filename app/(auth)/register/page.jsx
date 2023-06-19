@@ -1,5 +1,5 @@
 "use client"
-import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -33,8 +33,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  const [statusMsg, setStatusMsg] = React.useState(null);
-  const [inputs, setInputs] = React.useState({
+  const [statusMsg, setStatusMsg] = useState(null);
+  const [inputs, setInputs] = useState({
     email: "",
     username: "",
     password: "",
@@ -44,7 +44,7 @@ export default function Register() {
     description:""
   })
 
-  const [selectedCheckBox, setSelectedCheckBox] = React.useState("")
+  const [selectedCheckBox, setSelectedCheckBox] = useState("")
 
   const handleChange = (event) => {
     if (event.target.name !== "patient" && event.target.name !== "doctor") {

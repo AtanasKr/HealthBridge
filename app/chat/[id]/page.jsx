@@ -13,7 +13,6 @@ import LoadingComponent from "@components/LoadingComponent";
 import { useSession } from 'next-auth/react';
 
 
-let messages = null;
 const Chat = (ctx) => {
     const [doctorHolder, setDoctorHolder] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -25,7 +24,7 @@ const Chat = (ctx) => {
         username = session.user.username;
     }
 
-    async function getMessages() {
+    const getMessages = async () => {
 
         const resMessages = await fetch("http://localhost:3000/api/getChats")
         const getMessages = await resMessages.json();
@@ -35,7 +34,6 @@ const Chat = (ctx) => {
         if (results.length > 0) {
             setMessages(results);
         }
-        debugger;
     }
 
     useEffect(() => {
@@ -52,7 +50,7 @@ const Chat = (ctx) => {
     useEffect(() => {
 
         getMessages();
-    }, [])
+    }, [messages])
 
     const [input, setInput] = useState("");
 
