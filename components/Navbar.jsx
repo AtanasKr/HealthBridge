@@ -63,9 +63,9 @@ function Navbar() {
                         </Button></Link>}
 
                         {session?.user &&<Link href={`/showChats`}><Button
-                            key={"Хронология на съобщения"}
+                            key={"Хронология"}
                             sx={{ my: 2, color: 'black' }}>
-                            {"Хронология на съобщения"}
+                            {"Хронология"}
                         </Button></Link>}
 
                     </Box>
