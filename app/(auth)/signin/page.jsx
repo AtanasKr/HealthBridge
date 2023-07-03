@@ -99,7 +99,6 @@ const SignIn = () => {
               id="email"
               label="Имейл"
               name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -111,7 +110,6 @@ const SignIn = () => {
               label="Парола"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
             <Button
               type="submit"
